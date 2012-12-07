@@ -1,0 +1,305 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:532: checking for gcc
+configure:645: checking whether the C compiler (gcc  ) works
+configure:661: gcc -o conftest    conftest.c  1>&5
+configure:687: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:692: checking whether we are using GNU C
+configure:701: gcc -E conftest.c
+configure:720: checking whether gcc accepts -g
+configure:753: checking how to run the C preprocessor
+configure:774: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:833: checking whether make sets ${MAKE}
+configure:861: checking for AIX
+configure:885: checking for POSIXized ISC
+configure:912: checking for X
+configure:979: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1055: gcc -o conftest -g -O2   conftest.c -lXt  1>&5
+configure:1226: checking for dnet_ntoa in -ldnet
+configure:1245: gcc -o conftest -g -O2   conftest.c -ldnet   1>&5
+/usr/bin/ld: cannot find -ldnet
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 1234 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char dnet_ntoa();
+
+int main() {
+dnet_ntoa()
+; return 0; }
+configure:1267: checking for dnet_ntoa in -ldnet_stub
+configure:1286: gcc -o conftest -g -O2   conftest.c -ldnet_stub   1>&5
+/usr/bin/ld: cannot find -ldnet_stub
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 1275 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char dnet_ntoa();
+
+int main() {
+dnet_ntoa()
+; return 0; }
+configure:1315: checking for gethostbyname
+configure:1343: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1413: checking for connect
+configure:1441: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1505: checking for remove
+configure:1533: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1597: checking for shmat
+configure:1625: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1698: checking for IceConnectionNumber in -lICE
+configure:1717: gcc -o conftest -g -O2   conftest.c -lICE   1>&5
+configure:1744: checking for ANSI C header files
+configure:1757: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1824: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:1819:67: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:1852: checking for unistd.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for fcntl.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for sys/time.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for sys/types.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for utime.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for string.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for strings.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for values.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for ncurses.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1852: checking for curses.h
+configure:1862: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1892: checking for sys/soundcard.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1892: checking for machine/soundcard.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1898:31: fatal error: machine/soundcard.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1897 "configure"
+#include "confdefs.h"
+#include <machine/soundcard.h>
+configure:1892: checking for sun/audioio.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1898:25: fatal error: sun/audioio.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1897 "configure"
+#include "confdefs.h"
+#include <sun/audioio.h>
+configure:1892: checking for sys/audioio.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1898:25: fatal error: sys/audioio.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1897 "configure"
+#include "confdefs.h"
+#include <sys/audioio.h>
+configure:1892: checking for getopt.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1892: checking for features.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1892: checking for sys/termios.h
+configure:1902: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1932: checking for posix_opt.h
+configure:1942: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1938:23: fatal error: posix_opt.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1937 "configure"
+#include "confdefs.h"
+#include <posix_opt.h>
+configure:1932: checking for sys/ioctl.h
+configure:1942: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1932: checking for sys/ipc.h
+configure:1942: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1932: checking for sys/shm.h
+configure:1942: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1932: checking for sys/stat.h
+configure:1942: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1932: checking for sys/utime.h
+configure:1942: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1938:23: fatal error: sys/utime.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1937 "configure"
+#include "confdefs.h"
+#include <sys/utime.h>
+configure:1972: checking for windows.h
+configure:1982: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1978:21: fatal error: windows.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1977 "configure"
+#include "confdefs.h"
+#include <windows.h>
+configure:1972: checking for ddraw.h
+configure:1982: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1978:19: fatal error: ddraw.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 1977 "configure"
+#include "confdefs.h"
+#include <ddraw.h>
+configure:2010: checking for be_math.h
+configure:2020: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2016:21: fatal error: be_math.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 2015 "configure"
+#include "confdefs.h"
+#include <be_math.h>
+configure:2046: checking for machine/joystick.h
+configure:2056: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2052:30: fatal error: machine/joystick.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 2051 "configure"
+#include "confdefs.h"
+#include <machine/joystick.h>
+configure:2086: checking for devices/ahi.h
+configure:2096: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2092:25: fatal error: devices/ahi.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 2091 "configure"
+#include "confdefs.h"
+#include <devices/ahi.h>
+configure:2126: checking for dmedia/audio.h
+configure:2136: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2132:26: fatal error: dmedia/audio.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 2131 "configure"
+#include "confdefs.h"
+#include <dmedia/audio.h>
+configure:2126: checking for SDL/SDL.h
+configure:2136: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2166: checking for libraries/cybergraphics.h
+configure:2176: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2172:37: fatal error: libraries/cybergraphics.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 2171 "configure"
+#include "confdefs.h"
+#include <libraries/cybergraphics.h>
+configure:2166: checking for cybergraphx/cybergraphics.h
+configure:2176: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2172:39: fatal error: cybergraphx/cybergraphics.h: No such file or directory
+compilation terminated.
+configure: failed program was:
+#line 2171 "configure"
+#include "confdefs.h"
+#include <cybergraphx/cybergraphics.h>
+configure:2204: checking size of char
+configure:2223: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2217:11: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2243: checking size of short
+configure:2262: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2256:11: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2282: checking size of int
+configure:2301: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2295:11: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2321: checking size of long
+configure:2340: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2334:11: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2360: checking size of long long
+configure:2379: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2373:11: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2399: checking size of __int64
+configure:2418: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2412:11: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2413:29: error: '__int64' undeclared (first use in this function)
+configure:2413:29: note: each undeclared identifier is reported only once for each function it appears in
+configure: failed program was:
+#line 2407 "configure"
+#include "confdefs.h"
+#include <stdio.h>
+main()
+{
+  FILE *f=fopen("conftestval", "w");
+  if (!f) exit(1);
+  fprintf(f, "%d\n", sizeof(__int64));
+  exit(0);
+}
+configure:2439: checking for working const
+configure:2493: gcc -c -g -O2  conftest.c 1>&5
+configure:2514: checking for inline
+configure:2528: gcc -c -g -O2  conftest.c 1>&5
+configure:2557: checking for mode_t
+configure:2590: checking for off_t
+configure:2623: checking for pid_t
+configure:2656: checking for st_blocks in struct stat
+configure:2669: gcc -c -g -O2  conftest.c 1>&5
+configure:2692: checking whether time.h and sys/time.h may both be included
+configure:2706: gcc -c -g -O2  conftest.c 1>&5
+configure:2727: checking whether struct tm is in sys/time.h or time.h
+configure:2740: gcc -c -g -O2  conftest.c 1>&5
+configure:2763: checking whether gcc needs -traditional
+configure:2809: checking for 8-bit clean memcmp
+configure:2827: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2822:3: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2845: checking return type of signal handlers
+configure:2867: gcc -c -g -O2  conftest.c 1>&5
+configure:2886: checking whether utime accepts a null argument
+configure:2907: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2901:1: warning: incompatible implicit declaration of built-in function 'exit' [enabled by default]
+configure:2933: checking for getcwd
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for getopt
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for strdup
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2945:6: warning: conflicting types for built-in function 'strdup' [enabled by default]
+configure:2933: checking for gettimeofday
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for sigaction
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for mkdir
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for rmdir
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for select
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for strerror
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2933: checking for strstr
+configure:2961: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2945:6: warning: conflicting types for built-in function 'strstr' [enabled by default]
+configure:2988: checking for tcgetattr
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2988: checking for cfmakeraw
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2988: checking for readdir_r
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2988: checking for vprintf
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3000:6: warning: conflicting types for built-in function 'vprintf' [enabled by default]
+configure:2988: checking for vsprintf
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3000:6: warning: conflicting types for built-in function 'vsprintf' [enabled by default]
+configure:2988: checking for vfprintf
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3000:6: warning: conflicting types for built-in function 'vfprintf' [enabled by default]
+configure:2988: checking for setitimer
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
