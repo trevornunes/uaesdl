@@ -43,12 +43,13 @@
     <!--  The category where the application appears. Either core.games or core.media. -->
     <category>core.games</category>
     <name>UAE</name>
-    <asset path="assets">assets</asset>
     <asset path="icon.png">icon.png</asset>
     <asset path="sdl-controls.xml">sdl-controls.xml</asset>
+    <asset path="amiga.png">amiga.png</asset>
     <asset path="${workspace_loc:/TouchControlOverlay/Device-Release/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     <asset path="${workspace_loc:/SDL12/Device-Release/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
-    <asset path="amiga.png">amiga.png</asset>
+    <asset path="fire.png">fire.png</asset>
+    <asset path="dpad.png">dpad.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.818579276" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/uae" entry="true" type="Qnx/Elf">uae</asset>

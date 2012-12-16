@@ -36,6 +36,8 @@ void romlist_add (char *path, struct romdata *rd, int loc)
     rl2->path = my_strdup (path);
     rl2->rd = rd;
     rl2->loc = loc;
+
+    fprintf(stderr,"romlist_add: %s\n",path);
 }
 
 char *romlist_get (struct romdata *rd)
@@ -109,6 +111,7 @@ static void sort_romlist (void)
 	}
     }
     romlist_cnt = j;
+    fprintf(stderr,"sorted rom count %d", romlist_cnt);
 }
 
 void romlist_clear (int mask)
@@ -630,7 +633,7 @@ void romwarning(int *ids)
 void scan_roms (char *rpath, int loc)
 {
     DIR *dir;
-    char *path ="/accounts/1000/shared/misc/uae";
+    char *path ="/accounts/1000/shared/misc/uae/roms";
 
     fprintf(stderr,"scan_roms\n");
 

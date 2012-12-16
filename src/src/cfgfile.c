@@ -943,7 +943,7 @@ int cfgfile_load (struct uae_prefs *p, const char *filename)
 
     FILE *fh;
     char line[256];
-
+    fprintf(stderr,"cfgfile_load %s\n",filename);
     fh = fopen (filename, "r");
     if (! fh)
 	return 0;
@@ -967,8 +967,8 @@ int cfgfile_load (struct uae_prefs *p, const char *filename)
     subst (p->path_rom, p->romextfile, sizeof p->romextfile);
     subst (p->path_rom, p->keyfile, sizeof p->keyfile);
 
-    fprintf(stderr,"path_floppy[0] %s\n", p->df[0] );
-    fprintf(stderr,"path_rom %s", p->romfile);
+    fprintf(stderr,"cfgfile_load: path_floppy[0] %s\n", p->df[0] );
+    fprintf(stderr,"cfgfile_load:       path_rom %s", p->romfile);
 
     return 1;
 }

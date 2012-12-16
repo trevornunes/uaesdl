@@ -14,6 +14,6 @@
 
 struct flag_struct regflags;
 
-void machdep_init (void)
+void vf (void)
 {
 }

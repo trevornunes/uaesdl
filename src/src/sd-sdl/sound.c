@@ -125,6 +125,8 @@ static int open_sound (void)
 	printf ("Couldn't open audio: %s\n", SDL_GetError());
 	return 0;
     }
+    fprintf(stderr,"SDL SOUND initialized ok\n");
+
     have_sound = 1;
 
     obtainedfreq = obtained.freq;

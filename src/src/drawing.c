@@ -1724,8 +1724,8 @@ int check_prefs_changed_gfx (void)
 {
     int params_changed = 0, screen_changed = 0;
     int old_x, old_y;
-#ifndef __QNXNTO__
-    // can't find screen_is_picasso mystery variable tied to PICASS96 gfx card setting.
+
+
     if (!screen_is_picasso) {
 	if (curr_gfx == &currprefs.gfx_w
 	    && memcmp (&changed_prefs.gfx_w, &currprefs.gfx_w, sizeof (struct gfx_params)) != 0)
@@ -1740,7 +1740,7 @@ int check_prefs_changed_gfx (void)
 	} else if (curr_gfx == &currprefs.gfx_f
 		   && memcmp (&changed_prefs.gfx_f, &currprefs.gfx_f, sizeof (struct gfx_params)) != 0)
 	{
-#endif
+
 	    old_x = currprefs.gfx_f.width;
 	    old_y = currprefs.gfx_f.height;
 	    fixup_prefs_dimensions (&changed_prefs.gfx_f, gfx_fullscreen_modes, n_fullscreen_modes);
@@ -1748,9 +1748,10 @@ int check_prefs_changed_gfx (void)
 	    params_changed = 1;
 	    screen_changed = (old_x != currprefs.gfx_f.width
 			      || old_y != currprefs.gfx_f.height);
-#ifndef __QNXNTO__
+
 	}
-#endif
+    }
+
 	if (changed_prefs.gfx_afullscreen != currprefs.gfx_afullscreen) {
 	    screen_changed = 1;
 	}
@@ -1823,10 +1824,9 @@ void vsync_handle_redraw (int long_frame, int lof_changed)
 	    notice_screen_contents_lost ();
 	    notice_new_xcolors ();
 
-#ifndef __QNXNTO__
 	    if (screen_is_picasso)
 		picasso_enablescreen (1);
-#endif
+
 	}
 
 	if (inhibit_frame != 0)
@@ -1920,7 +1920,8 @@ void reset_drawing (void)
 void init_drawing_at_reset (void)
 {
 #ifdef PICASSO96
-    InitPicasso96 ();
+	if( currprefs.gfxmem_size )
+         InitPicasso96 ();
 #endif
     picasso_requested_on = 0;
     picasso_on = 0;

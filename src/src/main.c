@@ -39,6 +39,7 @@
 #include "scsidev.h"
 #include "romlist.h"
 
+
 #ifdef USE_SDL
 #include "SDL.h"
 #endif
@@ -230,16 +231,16 @@ void default_prefs (struct uae_prefs *p)
     p->sound_mixed_stereo_delay = 0;
     p->sound_freq = DEFAULT_SOUND_FREQ;
     p->sound_maxbsiz = DEFAULT_SOUND_MAXB;
-    p->sound_interpol = 2;
+    p->sound_interpol = 0;
     p->sound_filter = FILTER_SOUND_OFF;
     p->sound_filter_type = FILTER_SOUND_TYPE_A500;
 
-    p->gfx_framerate = 1;
+    p->gfx_framerate = 0;
     p->gfx_w.width = 800;
     p->gfx_w.height = 576;
     p->gfx_w.lores = 0;
-    p->gfx_w.linedbl = 2;
-    p->gfx_w.correct_aspect = 0;
+    p->gfx_w.linedbl = 1;
+    p->gfx_w.correct_aspect = 1;
     p->gfx_w.xcenter = 0;
     p->gfx_w.ycenter = 0;
     p->gfx_f = p->gfx_w;
@@ -273,19 +274,19 @@ void default_prefs (struct uae_prefs *p)
     p->cs_ramseyrev = -1;
     p->cs_ide = 0;
 
-    mkdir("/accounts/1000/shared/misc/uae",0777);
+    mkdir("/accounts/1000/shared/misc/uae/roms",0777);
 
-    strcpy (p->df[0], "/accounts/1000/shared/misc/uae/roms/df0.adf");
-  //  strcpy (p->df[1], "/accounts/1000/shared/misc/uae/roms/df1.adf");
+   strcpy (p->df[0], "/accounts/1000/shared/misc/uae/roms/df0.adf");
+ // strcpy (p->df[1], "/accounts/1000/shared/misc/uae/roms/Hardwir2.adf");
   //  strcpy (p->df[2], "/accounts/1000/shared/misc/uae/roms/df0.adf");
   //  strcpy (p->df[3], "/accounts/1000/shared/misc/uae/roms/df1.adf");
 
-    strcpy (p->romfile, "/accounts/1000/shared/misc/roms/kick.rom");
+    strcpy (p->romfile, "/accounts/1000/shared/misc/uae/roms/kick12.rom");
     strcpy (p->keyfile, "");
     strcpy (p->prtname, DEFPRTNAME);
     p->rom_crc32 = 0;
 
-    strcpy (p->path_rom, "/accounts/1000/shared/misc/uae");
+    strcpy (p->path_rom, "/accounts/1000/shared/misc/uae/roms");
     strcpy (p->path_floppy, "/accounts/1000/shared/misc/uae/roms");
     strcpy (p->path_hardfile, "/accounts/1000/shared/misc/uae/roms");
 
@@ -303,7 +304,7 @@ void default_prefs (struct uae_prefs *p)
     p->fpu_model = 0;
     p->address_space_24 = 0;
 
-    p->fastmem_size = 0x00000000;
+         p->fastmem_size = 0x00000000;
     p->mbresmem_low_size = 0x00000000;
     p->mbresmem_high_size = 0x00000000;
     p->z3fastmem_size = 0x00000000;
@@ -573,9 +574,6 @@ static void parse_cmdline_and_init_file (int argc, char **argv)
     strcpy (optionsfile, "");
     printf("parse_cmdline_and_init_file\n");
 
-#ifdef __QNXNTO__
-   // create_configz();
-#endif
 
 #ifdef OPTIONS_IN_HOME
     home = getenv ("HOME");
@@ -680,12 +678,20 @@ void real_main (int argc, char **argv)
      return;
    }
 
-
-    fprintf(stderr,"default_prefs \n");
     default_prefs (&currprefs);
+#ifndef __QNXNTO__
+   scan_configs ();
+#endif
 
-    //scan_configs ();
-
+   if(! fopen("/accounts/1000/shared/misc/uae/uaerc", "r") )
+   {
+   	fprintf(stderr,"uaerc config not found, saving defaults\n");
+       cfgfile_save (&currprefs,"/accounts/1000/shared/misc/uae/uaerc");
+   }
+     else
+   {
+        cfgfile_load(&currprefs,"/accounts/1000/shared/misc/uae/uaerc");
+   }
     /* Can be overriden in graphics_setup, although there's not much of a
        point.  Fullscreen modes are filled in by graphics_setup.  */
     gfx_windowed_modes = default_windowed_modes;
@@ -703,10 +709,10 @@ void real_main (int argc, char **argv)
     rtarea_init ();
     hardfile_install ();
     scsidev_install ();
-    cfgfile_load (&currprefs,"/accounts/1000/shared/misc/uae/uaerc");
- //   parse_cmdline_and_init_file (argc, argv);
 
-    machdep_init ();
+    //   parse_cmdline_and_init_file (argc, argv);
+
+   // machdep_init ();
     init_gtod ();
 
     if (! setup_sound ()) {
@@ -758,20 +764,21 @@ void real_main (int argc, char **argv)
 
     custom_init (); /* Must come after memory_init */
     serial_init ();
-    fprintf(stderr,"DISK_init\n");
     DISK_init ();
 
     reset_frame_rate_hack ();
+
+
     init_m68k();
 
-//    gui_update ();
+//  gui_update ();
     if (graphics_init ())
     {
 
 	   reset_drawing ();
-	   setup_brkhandler ();
-	   if (currprefs.start_debugger && debuggable ())
-	       activate_debugger ();
+       setup_brkhandler ();
+      if (currprefs.start_debugger && debuggable ())
+           activate_debugger ();
 
 	   fprintf(stderr,"\n");
        fprintf( stderr,"-------------------\n");
@@ -794,18 +801,6 @@ void uae_abort (const char *msg)
 #ifndef NO_MAIN_IN_MAIN_C
 int main (int argc, char **argv)
 {
-	fprintf(stderr,"      size int %d\n", sizeof(int));
-	fprintf(stderr,"     size long %d\n", sizeof(long));
-	fprintf(stderr,"size long long %d\n", sizeof(long long));
-    fprintf(stderr,"  size of char %d\n", sizeof(char) );
-    /*
-    size int 4
-   size long 4
-size long long 8
-size of char 1
-*/
-
-
     real_main (argc, argv);
     return 0;
 }

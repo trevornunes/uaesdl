@@ -37,7 +37,7 @@
 #include "sdlgfx.h"
 
 /* Uncomment for debugging output */
-//#define DEBUG
+#define DEBUG
 
 #define write_log(...) printf
 
@@ -52,7 +52,7 @@ static SDL_Surface *screen;
 
 /* Standard P96 screen modes */
 #define MAX_SCREEN_MODES 12
-static int x_size_table[MAX_SCREEN_MODES] = { 320, 320, 320, 320, 640, 640, 640, 800, 1024, 1152, 1280 };
+static int x_size_table[MAX_SCREEN_MODES] = { 320, 320, 320, 320, 640, 640, 640, 800,1024, 1152, 1280 };
 static int y_size_table[MAX_SCREEN_MODES] = { 200, 240, 256, 400, 350, 480, 512, 600, 768,  864,  1024 };
 
 static int red_bits, green_bits, blue_bits;
@@ -425,7 +425,7 @@ void flush_block (int first_line, int last_line)
 void flush_screen (int first_line, int last_line)
 {
     if (! (screen->flags & SDL_DOUBLEBUF))
-	return;
+	   return;
 
     SDL_BlitSurface (display,0,screen,0);
 
@@ -470,6 +470,7 @@ int graphics_subinit (void)
 
     fprintf (stderr,"Function: graphics_subinit\n");
 
+#ifdef PICASSO96
     if (screen_is_picasso) {
 	// Set height, width for Picasso gfx
 	current_width  = picasso_vidinfo.width;
@@ -487,8 +488,19 @@ int graphics_subinit (void)
 	current_width  = curr_gfx->width;
 	current_height = curr_gfx->height;
     }
+#else
+	fullscreen = currprefs.gfx_afullscreen;
+	if (fullscreen)
+	    curr_gfx = &currprefs.gfx_f;
+	else
+	    curr_gfx = &currprefs.gfx_w;
 
+	current_width  = curr_gfx->width;
+	current_height = curr_gfx->height;
+#endif
     find_best_mode (&current_width, &current_height, bitdepth, &fullscreen);
+
+    fprintf(stderr,"graphics_subinit: %d x %d bd=%d\n", current_width, current_height, bitdepth);
 
     if (!screen_is_picasso) {
 	    gfxvidinfo.width  = current_width;
@@ -512,12 +524,11 @@ int graphics_subinit (void)
 	                 uiSDLVidModFlags |= SDL_DOUBLEBUF;
     }
 
-
     fprintf (stderr,"Resolution: %d x %d x %d (FS: %d)\n", current_width, current_height, bitdepth, fullscreen);
 
     screen = SDL_SetVideoMode (current_width, current_height, bitdepth, uiSDLVidModFlags);
 
-    fprintf(stderr,"SDLGFX: video mode set.\n");
+    fprintf(stderr,"SDLGFX: screen now open...\n");
     if (screen == NULL) {
     	fprintf(stderr,"SDLGFX: SDL_SetVideoMode failed -> %s", SDL_GetError() );
 #if 0
@@ -552,7 +563,7 @@ int graphics_subinit (void)
 
 	/* Mouse is now always grabbed when full-screen - to work around
 	 * problems with full-screen mouse input in some SDL implementations */
-#ifndef __QNXNTO__
+
 	if (fullscreen)
 	    SDL_WM_GrabInput (SDL_GRAB_ON);
 	else
@@ -560,7 +571,6 @@ int graphics_subinit (void)
 
 	/* Hide mouse cursor */
 	SDL_ShowCursor (/*currprefs.hide_cursor || */fullscreen || mousegrab ? SDL_DISABLE : SDL_ENABLE);
-#endif
 	inputdevice_release_all_keys ();
 	reset_hotkeys ();
 
@@ -626,7 +636,7 @@ int graphics_init (void)
 #ifdef PICASSO96
     screen_is_picasso = 0;
 #endif
-    mousegrab = 0;
+    mousegrab = 1;
 
     fixup_prefs_dimensions (&currprefs.gfx_w, gfx_windowed_modes, n_windowed_modes);
     fixup_prefs_dimensions (&currprefs.gfx_f, gfx_fullscreen_modes, n_fullscreen_modes);
@@ -683,9 +693,15 @@ void handle_events (void)
 {
     SDL_Event rEvent;
 
+#ifndef __QNXNTO__
     gui_handle_events ();
+#endif
+
+   SDL_Flip(screen); // HACK: FIX ME TREV
+
 
     while (SDL_PollEvent (&rEvent)) {
+
 	switch (rEvent.type) {
 	case SDL_QUIT:
 	    DEBUG_LOG ("Event: quit\n");
@@ -721,7 +737,7 @@ void handle_events (void)
 
 	    keycode = rEvent.key.keysym.sym;
 
-	    DEBUG_LOG ("Event: key %d %s\n", keycode, state ? "down" : "up");
+	    fprintf (stderr,"Event: key %d %s\n", keycode, state ? "down" : "up");
 
 	    if ((ievent = match_hotkey_sequence (keycode, state))) {
 		DEBUG_LOG ("Hotkey event: %d\n", ievent);
@@ -752,7 +768,9 @@ void handle_events (void)
 	    }
 	    break;
 	} /* end switch() */
+
     } /* end while() */
+
 
 #ifdef PICASSO96
     if (screen_is_picasso && refresh_necessary) {
@@ -927,7 +945,7 @@ static void add_p96_mode (int width, int height, int emulate_chunky, int *count)
 	    DisplayModes[*count].refresh    = 75;
 	    (*count)++;
 
-	    write_log ("SDLGFX: Added P96 mode: %dx%dx%d\n", width, height, (i == 1) ? 8 : bitdepth);
+	    fprintf (stderr,"SDLGFX: Added P96 mode: %dx%dx%d\n", width, height, (i == 1) ? 8 : bitdepth);
 	}
     }
     return;
@@ -944,6 +962,8 @@ int DX_FillResolutions (uae_u16 *ppixel_format)
     /* Find supported pixel formats */
     picasso_vidinfo.rgbformat = get_p96_pixel_format (SDL_GetVideoInfo()->vfmt);
 
+    fprintf(stderr,"RGB %d\n", picasso_vidinfo.rgbformat);
+
     *ppixel_format = 1 << picasso_vidinfo.rgbformat;
     if (bit_unit == 16 || bit_unit == 32) {
 	*ppixel_format |= RGBFF_CHUNKY;
@@ -952,23 +972,26 @@ int DX_FillResolutions (uae_u16 *ppixel_format)
 
     /* Check list of standard P96 screenmodes */
     for (i = 0; i < MAX_SCREEN_MODES; i++) {
+
 	if (SDL_VideoModeOK (x_size_table[i], y_size_table[i], bitdepth,
-			     SDL_HWSURFACE | SDL_FULLSCREEN)) {
+			     SDL_HWSURFACE | SDL_FULLSCREEN))
+	  {
 	    add_p96_mode (x_size_table[i], y_size_table[i], emulate_chunky, &count);
-	}
+	  }
+
     }
 
     /* Check list of supported SDL screenmodes */
     for (i = 0; i < n_fullscreen_modes; i++) {
-	int j;
-	int found = 0;
-	for (j = 0; j < MAX_SCREEN_MODES - 1; j++) {
-	    if (gfx_fullscreen_modes[i].w == x_size_table[j] &&
-		gfx_fullscreen_modes[i].h == y_size_table[j])
-	    {
-		found = 1;
-		break;
-	    }
+	     int j;
+	     int found = 0;
+	     for (j = 0; j < MAX_SCREEN_MODES - 1; j++) {
+	         if (gfx_fullscreen_modes[i].w == x_size_table[j] &&
+		         gfx_fullscreen_modes[i].h == y_size_table[j])
+	           {
+		              found = 1;
+		              break;
+	           }
 	}
 
 	/* If SDL mode is not a standard P96 mode (and thus already added to the
@@ -977,7 +1000,7 @@ int DX_FillResolutions (uae_u16 *ppixel_format)
 	    add_p96_mode (gfx_fullscreen_modes[i].w, gfx_fullscreen_modes[i].h,
 			  emulate_chunky, &count);
     }
-
+    DEBUG_LOG ("Function: DX_FillResolutions done\n");
     return count;
 }
 

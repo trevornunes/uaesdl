@@ -3525,6 +3525,8 @@ void customreset (void)
     struct timeval tv;
 #endif
 
+    fprintf(stderr,"customreset\n");
+
     /* If we're in a loop of quick successive resets, we should give
        the GUI some time to respond to a "Quit" event.  */
     handle_events ();

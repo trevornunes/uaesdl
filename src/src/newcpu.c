@@ -121,6 +121,7 @@ static void build_cpufunctbl (void)
     int lvl;
     fprintf(stderr,"build_cpufunctbl\n");
 
+
     switch (currprefs.cpu_model) {
     case 68060:
 	lvl = 5;
@@ -179,7 +180,7 @@ static void build_cpufunctbl (void)
 	if (tbl[i].specific)
 	    cpufunctbl[tbl[i].opcode] = tbl[i].handler;
     }
-    printf ("Building CPU, %d opcodes (%d). CPU=%d, FPU=%d\n",
+    fprintf (stderr,"Building CPU, %d opcodes (%d). CPU=%d, FPU=%d\n",
 	       opcnt,
 	       currprefs.address_space_24, currprefs.cpu_model, currprefs.fpu_model);
 }

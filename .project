@@ -3,6 +3,8 @@
 	<name>uae</name>
 	<comment></comment>
 	<projects>
+		<project>SDL12</project>
+		<project>TouchControlOverlay</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -27,7 +29,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/uae/Device-Release}</value>
+					<value>${workspace_loc:/uae/Device-Debug}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.contents</key>
