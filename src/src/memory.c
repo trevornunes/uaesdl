@@ -976,7 +976,6 @@ static int load_kickstart (void)
 
     fprintf(stderr,"load_kickstart\n");
 
-#ifndef __QNXNTO__
     if (currprefs.rom_crc32) {
 	    for (i = 0;; i++) {
 	        struct romlist *rl = romlist_from_idx (i, ROMTYPE_KICK, 1);
@@ -992,13 +991,16 @@ static int load_kickstart (void)
     }
      else
 	     f = zfile_open (currprefs.romfile, "rb");
-#else
+
+/*
     fprintf(stderr,"kick rom open '%s'\n", currprefs.romfile);
     f = zfile_open( currprefs.romfile, "rb");
     if(!f)
     	fprintf(stderr,"zFile_open failed to load kickstart rom\n");
-#endif
+*/
+
     if (f == NULL) {
+    	fprintf(stderr,"memory_init: kickstart failed to load %s\n", currprefs.romfile);
 #if defined (AMIGA)
 #define USE_UAE_ERSATZ "USE_UAE_ERSATZ"
 	if (!getenv (USE_UAE_ERSATZ)) {
@@ -1022,7 +1024,7 @@ static int load_kickstart (void)
 #endif
     kickstart_version = (kickmemory[12] << 8) | kickmemory[13];
 
-    fprintf(stderr,"kickstart version %d", kickstart_version );
+    fprintf(stderr,"kickstart version %d\n", kickstart_version );
     return 1;
 }
 

@@ -1,49 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
 
-<dpad x="2" y="360" height="200" width="200">
-<label x="0" y="0"  height="200" width="200" image="dpad.png"/>
+<toucharea x="0" y="0" width="320" height="256" image="touch_dark.png" tapSensitive="1"/>
+
+<mousebutton x="200" y="380" width="100" height="100" mask="1" button="left"/>
+<mousebutton x="400" y="380" width="100" height="100" mask="1" button="right"/>
+
+<key x="200" y="0" width="80" height="120" sym="282" scancode="282"/>
+<key x="300" y="0" width="80" height="120" sym="283" scancode="283"/>
+<key x="400" y="0" width="80" height="120" sym="284" scancode="284"/>
+<key x="500" y="0" width="80" height="120" sym="285" scancode="285"/>
+
+<key x="0" y="0" width="100" height="100" sym="292" scancode="292"/>
+
+<dpad x="0" y="380" height="160" width="160">
+<label x="0" y="0"  height="160" width="160" image="dpad.png"/>
 </dpad>
 
-
-
-<key x="0" y="0" width="80" height="80" sym="254" scancode="254"/>
-
-<key x="80" y="0" width="80" height="80" sym="251" scancode="251"/>
-<key x="160" y="0" width="80" height="80" sym="252" scancode="252"/>
-<key x="240" y="0" width="80" height="80" sym="253" scancode="253"/>
-<key x="320" y="0" width="80" height="80" sym="254" scancode="254"/>
-<key x="400" y="0" width="80" height="80" sym="255" scancode="256"/>
-<key x="480" y="0" width="80" height="80" sym="256" scancode="256"/>
-<key x="560" y="0" width="80" height="80" sym="257" scancode="257"/>
-<key x="560" y="0" width="80" height="80" sym="258" scancode="258"/>
-
-<key x="900" y="0" width="80" height="80" sym="258" scancode="258"/>
-<key x="900" y="80" width="80" height="80" sym="258" scancode="258"/>
-<key x="900" y="160" width="80" height="80" sym="258" scancode="258"/>
-<key x="900" y="240" width="80" height="80" sym="258" scancode="258"/>
-
-
-
-<key x="900" y="400" width="64" height="64" sym="305" scancode="305">
-<label x="0" y="0" width="64" height="64" image="fire.png"/>
+<key x="840" y="380" width="80" height="80" sym="97" scancode="97">
+<label x="0" y="0" width="80" height="80" image="fire.png"/>
 </key>
-
-<toucharea x="224" y="0" width="800" height="600" image="touch_dark.png" tapSensitive="1"/>
-<mousebutton x="0" y="0" width="200" height="100" mask="1" button="left" image="sclick_dark.png">
-<label x="0" y="80" width="200" height="20" image="sclick.png"/>
-</mousebutton>
-
-<mousebutton x="0" y="100" width="200" height="200" mask="0" button="right" image="rclick_dark.png">
-<label x="0" y="180" width="200" height="20" image="rclick.png"/>
-</mousebutton>
-
-<mousebutton x="0" y="300" width="200" height="200" mask="0" button="left" image="lclick_dark.png">
-<label x="0" y="180" width="200" height="20" image="lclick.png"/>
-</mousebutton>
-
-<mousebutton x="0" y="500" width="200" height="100" mask="2" button="left" image="cclick_dark.png">
-<label x="0" y="80" width="200" height="20" image="cclick.png"/>
-</mousebutton>
 </emulation>
-

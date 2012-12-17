@@ -10,7 +10,7 @@
 #include "sysdeps.h"
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "memory.h"
 #include "custom.h"
 #include "keyboard.h"

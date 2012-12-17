@@ -12,7 +12,7 @@
 #include "sysconfig.h"
 #include "sysdeps.h"
 
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "options.h"
 #include "memory.h"
 #include "custom.h"

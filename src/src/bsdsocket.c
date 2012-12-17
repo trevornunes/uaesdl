@@ -20,7 +20,7 @@
 #include "newcpu.h"
 #include "autoconf.h"
 #include "traps.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "bsdsocket.h"
 
 #ifdef BSDSOCKET

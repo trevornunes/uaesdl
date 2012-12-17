@@ -17,7 +17,7 @@
 #include "sysdeps.h"
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "memory.h"
 #include "events.h"
 #include "custom.h"

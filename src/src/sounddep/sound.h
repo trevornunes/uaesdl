@@ -38,6 +38,7 @@ STATIC_INLINE int check_sound_buffers (void)
 #else
 #define DEFAULT_SOUND_MAXB 2048
 #define DEFAULT_SOUND_MINB 2048
+#define DEFAULT_SOUND_BITS 16
 #define DEFAULT_SOUND_FREQ 22050
 #define HAVE_STEREO_SUPPORT
 #endif

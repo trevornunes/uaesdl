@@ -256,6 +256,7 @@ static int find_best_mode (int *width, int *height, int depth, int *try_fs)
 
 	*width  = gfx_fullscreen_modes[i].w;
 	*height = gfx_fullscreen_modes[i].h;
+
 	found = 1;
 
 	fprintf (stderr,"SDLGFX: Using mode (%dx%d)\n", *width, *height);
@@ -452,7 +453,7 @@ int graphics_setup (void)
 	   bitdepth = info->vfmt->BitsPerPixel;
    	   bit_unit = info->vfmt->BytesPerPixel * 8;
 
-	fprintf (stderr,"SDLGFX: Display is %d bits deep.\n", bitdepth);
+	fprintf (stderr,"SDLGFX: Display %d bits per pixel\n", bitdepth);
 
 	/* Build list of screenmodes */
 	find_screen_modes (info->vfmt);
@@ -479,14 +480,11 @@ int graphics_subinit (void)
 	curr_gfx = 0;
     } else {
 	// Set height, width for Amiga gfx
-	fullscreen = currprefs.gfx_afullscreen;
-	if (fullscreen)
-	    curr_gfx = &currprefs.gfx_f;
-	else
-	    curr_gfx = &currprefs.gfx_w;
 
-	current_width  = curr_gfx->width;
-	current_height = curr_gfx->height;
+#ifdef __QNXNTO__
+	fullscreen = currprefs.gfx_afullscreen = 1;
+	fprintf(stderr,"force fullscreen for QNX\n");
+	curr_gfx = &currprefs.gfx_f;
     }
 #else
 	fullscreen = currprefs.gfx_afullscreen;
@@ -494,10 +492,12 @@ int graphics_subinit (void)
 	    curr_gfx = &currprefs.gfx_f;
 	else
 	    curr_gfx = &currprefs.gfx_w;
+#endif
+#endif
 
 	current_width  = curr_gfx->width;
 	current_height = curr_gfx->height;
-#endif
+
     find_best_mode (&current_width, &current_height, bitdepth, &fullscreen);
 
     fprintf(stderr,"graphics_subinit: %d x %d bd=%d\n", current_width, current_height, bitdepth);
@@ -518,11 +518,15 @@ int graphics_subinit (void)
     if (bitdepth == 8)
 	      uiSDLVidModFlags |= SDL_HWPALETTE;
 
+#ifdef __QNXNTO__
+    uiSDLVidModFlags |= SDL_FULLSCREEN | SDL_HWSURFACE | SDL_DOUBLEBUF;
+#else
     if (fullscreen) {
 	      uiSDLVidModFlags |= SDL_FULLSCREEN | SDL_HWSURFACE;
 	      if(!screen_is_picasso && 0 /*currprefs.gfx_vsync */)
 	                 uiSDLVidModFlags |= SDL_DOUBLEBUF;
     }
+#endif
 
     fprintf (stderr,"Resolution: %d x %d x %d (FS: %d)\n", current_width, current_height, bitdepth, fullscreen);
 
@@ -546,7 +550,11 @@ int graphics_subinit (void)
 #	endif
 
 	/* Set up buffer methods */
-
+#ifdef __QNXNTO__
+	// for some reason it's not always set and we would be writing direct
+	// to screen.
+    screen->flags |= SDL_DOUBLEBUF;
+#endif
 
 	if (screen->flags & SDL_DOUBLEBUF) {
 		fprintf(stderr,"SDLGFX: setup buffer screen\n");
@@ -697,8 +705,6 @@ void handle_events (void)
     gui_handle_events ();
 #endif
 
-   SDL_Flip(screen); // HACK: FIX ME TREV
-
 
     while (SDL_PollEvent (&rEvent)) {
 
@@ -737,7 +743,7 @@ void handle_events (void)
 
 	    keycode = rEvent.key.keysym.sym;
 
-	    fprintf (stderr,"Event: key %d %s\n", keycode, state ? "down" : "up");
+	  //  fprintf (stderr,"Event: key %d %s\n", keycode, state ? "down" : "up");
 
 	    if ((ievent = match_hotkey_sequence (keycode, state))) {
 		DEBUG_LOG ("Hotkey event: %d\n", ievent);

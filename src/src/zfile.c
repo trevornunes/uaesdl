@@ -228,9 +228,8 @@ struct zfile *zfile_open (const char *name, const char *mode)
 	       l->f = fopen (name, mode);
 
            if(!l->f)
-        	  fprintf(stderr,"zfile_open: fopen error %s for '%s'\n",strerror(errno), name);
-           else
-        	   fprintf(stderr,"zFile_open: '%s' ok\n", name);
+        	  fprintf(stderr,".");
+
 
     }
       else

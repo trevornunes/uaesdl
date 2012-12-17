@@ -15,7 +15,7 @@
 #include <assert.h>
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "uae.h"
 #include "gensound.h"
 #include "sounddep/sound.h"
@@ -3679,8 +3679,8 @@ void dumpcustom (void)
 		 (unsigned int)diwstrt, (unsigned int)diwstop, (unsigned int)ddfstrt, (unsigned int)ddfstop);
     console_out ("BPLCON 0: %04x 1: %04x 2: %04x 3: %04x 4: %04x\n", bplcon0, bplcon1, bplcon2, bplcon3, bplcon4);
     if (timeframes) {
-	console_out ("Average frame time: %f ms [frames: %d time: %d]\n",
-		     (double)frametime / timeframes, timeframes, frametime);
+	console_out ("Average frame time: %f ms [frames: %d time: %d] %f avg fps\n",
+		     (double)frametime / timeframes, timeframes, frametime, (double)1000/(frametime/timeframes) );
 	if (total_skipped)
 	    console_out ("Skipped frames: %d\n", total_skipped);
     }

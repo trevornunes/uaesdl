@@ -50,6 +50,7 @@
     <asset path="${workspace_loc:/SDL12/Device-Release/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
     <asset path="fire.png">fire.png</asset>
     <asset path="dpad.png">dpad.png</asset>
+    <asset path="A.png">A.png</asset>
     <configuration id="com.qnx.qcc.configuration.exe.debug.818579276" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/uae" entry="true" type="Qnx/Elf">uae</asset>

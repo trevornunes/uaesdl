@@ -32,7 +32,7 @@
 #include "newcpu.h"
 #include "autoconf.h"
 #include "traps.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "native2amiga.h"
 #include "bsdsocket.h"
 

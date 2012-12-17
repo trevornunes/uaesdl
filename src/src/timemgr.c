@@ -13,7 +13,7 @@
 #include <assert.h>
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "uae.h"
 #include "gensound.h"
 #include "sounddep/sound.h"

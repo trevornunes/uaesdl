@@ -16,7 +16,7 @@
 #include "newcpu.h"
 #include "gensound.h"
 #include "sounddep/sound.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "SDL_audio.h"
 
 int sound_fd;
@@ -32,7 +32,7 @@ static SDL_AudioSpec spec;
 static smp_comm_pipe to_sound_pipe;
 static uae_sem_t data_available_sem, callback_done_sem, sound_init_sem;
 
-static int dont_block;
+static int dont_block = 1;
 
 static int in_callback, closing_sound;
 
@@ -60,8 +60,9 @@ void finish_sound_buffer (void)
     dont_block = currprefs.m68k_speed == -1 && (!regs.stopped || active_fs_packets > 0);
     callback_sndbuf = sndbuf_base;
 
+
     if (dont_block)
-	delaying_for_sound = 1;
+      	delaying_for_sound = 1;
     uae_sem_post (&data_available_sem);
     if (!dont_block)
 	uae_sem_wait (&callback_done_sem);
@@ -139,7 +140,9 @@ static int open_sound (void)
     sndbufsize = size * 2 * obtained.channels;
     printf ("SDL sound driver found and configured at %d Hz, buffer is %d samples (%d ms).\n",
 	       obtainedfreq, obtained.samples, obtained.samples * 1000 / obtainedfreq);
+
     sync_with_sound = 1;
+
     return 1;
 }
 

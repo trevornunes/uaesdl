@@ -11,7 +11,7 @@
 #include <assert.h>
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "uae.h"
 #include "gensound.h"
 #include "audio.h"
@@ -105,7 +105,9 @@ static void scan_configs ( void )
 
     char apath[64];
     memset(&apath[0],0,64);
+#ifdef __QNXNTO__
     sprintf(&apath[0],"/accounts/1000/shared/misc/uae");
+#endif
 
     fprintf(stderr,"scan_configs: '%s'", apath);
 
@@ -134,7 +136,6 @@ static void scan_configs ( void )
     if (!data)
 	goto out1;
 
-    fprintf(stderr,"here\n");
 
     strcpy (buffer, apath);
     buffer[pathlen++] = '/';
@@ -226,7 +227,7 @@ void default_prefs (struct uae_prefs *p)
     p->test_drawing_speed = 0;
 
     p->produce_sound = 3;
-    p->sound_stereo = 0;
+    p->sound_stereo = 1;
     p->sound_stereo_separation = 7;
     p->sound_mixed_stereo_delay = 0;
     p->sound_freq = DEFAULT_SOUND_FREQ;
@@ -238,9 +239,9 @@ void default_prefs (struct uae_prefs *p)
     p->gfx_framerate = 0;
     p->gfx_w.width = 800;
     p->gfx_w.height = 576;
-    p->gfx_w.lores = 0;
+    p->gfx_w.lores = 1;
     p->gfx_w.linedbl = 1;
-    p->gfx_w.correct_aspect = 1;
+    p->gfx_w.correct_aspect = 0;
     p->gfx_w.xcenter = 0;
     p->gfx_w.ycenter = 0;
     p->gfx_f = p->gfx_w;
@@ -274,14 +275,15 @@ void default_prefs (struct uae_prefs *p)
     p->cs_ramseyrev = -1;
     p->cs_ide = 0;
 
+
     mkdir("/accounts/1000/shared/misc/uae/roms",0777);
 
-   strcpy (p->df[0], "/accounts/1000/shared/misc/uae/roms/df0.adf");
+  strcpy (p->df[0], "/accounts/1000/shared/misc/uae/roms/df0.adf");
  // strcpy (p->df[1], "/accounts/1000/shared/misc/uae/roms/Hardwir2.adf");
   //  strcpy (p->df[2], "/accounts/1000/shared/misc/uae/roms/df0.adf");
   //  strcpy (p->df[3], "/accounts/1000/shared/misc/uae/roms/df1.adf");
 
-    strcpy (p->romfile, "/accounts/1000/shared/misc/uae/roms/kick12.rom");
+ strcpy (p->romfile, "/accounts/1000/shared/misc/uae/roms/Kickstart v1.3 rev 34.5 (1987)(Commodore)(A3000).rom");
     strcpy (p->keyfile, "");
     strcpy (p->prtname, DEFPRTNAME);
     p->rom_crc32 = 0;
@@ -301,7 +303,7 @@ void default_prefs (struct uae_prefs *p)
 
     p->m68k_speed = 0;
     p->cpu_model = 68020;
-    p->fpu_model = 0;
+    p->fpu_model = 68882;
     p->address_space_24 = 0;
 
          p->fastmem_size = 0x00000000;
@@ -315,6 +317,8 @@ void default_prefs (struct uae_prefs *p)
     p->mountinfo = alloc_mountinfo ();
     inputdevice_default_prefs (p);
     p->bootrom = 1;
+
+
 }
 
 int fixup_prefs_dimensions (struct gfx_params *p, struct uae_rect *modes, int n_modes)

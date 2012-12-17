@@ -12,7 +12,7 @@
 #include <assert.h>
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "events.h"
 #include "memory.h"
 #include "custom.h"

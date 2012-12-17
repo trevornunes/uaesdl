@@ -29,7 +29,7 @@ void romlist_add (char *path, struct romdata *rd, int loc)
 {
     struct romlist *rl2;
 
-    fprintf(stderr,"romlist_add: %s", path);
+    fprintf(stderr,"romlist_add: %s\n", path);
     romlist_cnt++;
     list_of_roms = realloc (list_of_roms, sizeof (struct romlist) * romlist_cnt);
     rl2 = list_of_roms + romlist_cnt - 1;

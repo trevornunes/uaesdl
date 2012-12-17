@@ -13,7 +13,7 @@
 #include <ctype.h>
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "uae.h"
 #include "autoconf.h"
 #include "filesys.h"

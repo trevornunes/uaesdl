@@ -34,7 +34,7 @@
 #include "sysdeps.h"
 
 #include "options.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "uae.h"
 #include "memory.h"
 #include "custom.h"

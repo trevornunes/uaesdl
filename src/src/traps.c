@@ -17,7 +17,7 @@
 #include "memory.h"
 #include "custom.h"
 #include "newcpu.h"
-#include "threaddep/thread.h"
+#include "thread.h"
 #include "autoconf.h"
 #include "traps.h"
 #include <stdio.h>
