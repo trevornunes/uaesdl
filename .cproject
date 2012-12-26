@@ -26,6 +26,7 @@
 								<option id="com.qnx.qcc.option.compile.debug.1431438508" name="Debug (-g)" superClass="com.qnx.qcc.option.compile.debug" value="false" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.includePath.1328510886" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/src/targets}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL_ttf}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/src/td-posix}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/src/include}&quot;"/>
@@ -58,6 +59,7 @@
 								<option id="com.qnx.qcc.option.linker.langcpp.581790299" name="C++ (-lang-c++)" superClass="com.qnx.qcc.option.linker.langcpp" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.256961731" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL_ttf/Device-Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TouchControlOverlay/Device-Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL12/Device-Release}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
@@ -65,6 +67,7 @@
 								<option id="com.qnx.qcc.option.linker.security.1559076150" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.1775093032" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="SDL12"/>
+									<listOptionValue builtIn="false" value="SDL_ttf"/>
 									<listOptionValue builtIn="false" value="asound"/>
 									<listOptionValue builtIn="false" value="m"/>
 									<listOptionValue builtIn="false" value="xml2"/>
@@ -83,8 +86,14 @@
 					</folderInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.818579276.72036221" name="sound.c" rcbsApplicability="disable" resourcePath="src/src/sd-sdl/sound.c" toolsToInvoke="com.qnx.qcc.tool.compiler.1121187737.111881094">
 						<tool id="com.qnx.qcc.tool.compiler.1121187737.111881094" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.1121187737">
-							<option id="com.qnx.qcc.option.compiler.optlevel.1337395135" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.2" valueType="enumerated"/>
+							<option id="com.qnx.qcc.option.compiler.optlevel.1337395135" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.3" valueType="enumerated"/>
 							<inputType id="com.qnx.qcc.inputType.compiler.1853318384" superClass="com.qnx.qcc.inputType.compiler"/>
+						</tool>
+					</fileInfo>
+					<fileInfo id="com.qnx.qcc.configuration.exe.debug.818579276.654200150" name="cia.c" rcbsApplicability="disable" resourcePath="src/src/cia.c" toolsToInvoke="com.qnx.qcc.tool.compiler.1121187737.158584489">
+						<tool id="com.qnx.qcc.tool.compiler.1121187737.158584489" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.1121187737">
+							<option id="com.qnx.qcc.option.compiler.optlevel.1088746750" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.2" valueType="enumerated"/>
+							<inputType id="com.qnx.qcc.inputType.compiler.364434146" superClass="com.qnx.qcc.inputType.compiler"/>
 						</tool>
 					</fileInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.818579276.1621008060" name="sdlgfx.c" rcbsApplicability="disable" resourcePath="src/src/sdlgfx.c" toolsToInvoke="com.qnx.qcc.tool.compiler.1121187737.1976531641">
@@ -134,7 +143,7 @@
 					</fileInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.818579276.1614320239" name="drawing.c" rcbsApplicability="disable" resourcePath="src/src/drawing.c" toolsToInvoke="com.qnx.qcc.tool.compiler.1121187737.636797514">
 						<tool id="com.qnx.qcc.tool.compiler.1121187737.636797514" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.1121187737">
-							<option id="com.qnx.qcc.option.compiler.optlevel.1097439205" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
+							<option id="com.qnx.qcc.option.compiler.optlevel.1097439205" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.2" valueType="enumerated"/>
 							<inputType id="com.qnx.qcc.inputType.compiler.2034288397" superClass="com.qnx.qcc.inputType.compiler"/>
 						</tool>
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1997420366" name="Resource Custom Build Step">
@@ -269,10 +278,10 @@
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.2117852209" name="Resource Custom Build Step Output Type"/>
 						</tool>
 					</fileInfo>
-					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.405204958" name="cpudefs.c" rcbsApplicability="disable" resourcePath="src/src/cpudefs.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.390689972">
-						<tool id="com.qnx.qcc.tool.compiler.2009519439.390689972" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
-							<option id="com.qnx.qcc.option.compiler.optlevel.434569285" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
-							<inputType id="com.qnx.qcc.inputType.compiler.1146946432" superClass="com.qnx.qcc.inputType.compiler"/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.1283320436" name="blittable.c" rcbsApplicability="disable" resourcePath="src/src/blittable.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.813485061">
+						<tool id="com.qnx.qcc.tool.compiler.2009519439.813485061" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
+							<option id="com.qnx.qcc.option.compiler.optlevel.1953978151" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
+							<inputType id="com.qnx.qcc.inputType.compiler.1330584301" superClass="com.qnx.qcc.inputType.compiler"/>
 						</tool>
 					</fileInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.1330470231" name="cpuemu.c" rcbsApplicability="disable" resourcePath="src/src/cpuemu.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.1948115413">
@@ -287,10 +296,10 @@
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.123377531" name="Resource Custom Build Step Output Type"/>
 						</tool>
 					</fileInfo>
-					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.1283320436" name="blittable.c" rcbsApplicability="disable" resourcePath="src/src/blittable.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.813485061">
-						<tool id="com.qnx.qcc.tool.compiler.2009519439.813485061" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
-							<option id="com.qnx.qcc.option.compiler.optlevel.1953978151" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
-							<inputType id="com.qnx.qcc.inputType.compiler.1330584301" superClass="com.qnx.qcc.inputType.compiler"/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.405204958" name="cpudefs.c" rcbsApplicability="disable" resourcePath="src/src/cpudefs.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.390689972">
+						<tool id="com.qnx.qcc.tool.compiler.2009519439.390689972" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
+							<option id="com.qnx.qcc.option.compiler.optlevel.434569285" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
+							<inputType id="com.qnx.qcc.inputType.compiler.1146946432" superClass="com.qnx.qcc.inputType.compiler"/>
 						</tool>
 					</fileInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.845955074" name="blitops.c" rcbsApplicability="disable" resourcePath="src/src/blitops.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.1310918820">
@@ -305,16 +314,16 @@
 							<inputType id="com.qnx.qcc.inputType.compiler.1349435983" superClass="com.qnx.qcc.inputType.compiler"/>
 						</tool>
 					</fileInfo>
-					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.1810277834" name="main.c" rcbsApplicability="disable" resourcePath="src/src/main.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.936074045">
-						<tool id="com.qnx.qcc.tool.compiler.2009519439.936074045" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
-							<option id="com.qnx.qcc.option.compiler.optlevel.1597185623" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
-							<inputType id="com.qnx.qcc.inputType.compiler.1121699605" superClass="com.qnx.qcc.inputType.compiler"/>
-						</tool>
-					</fileInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.1225561121" name="blitfunc.c" rcbsApplicability="disable" resourcePath="src/src/blitfunc.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.89824827">
 						<tool id="com.qnx.qcc.tool.compiler.2009519439.89824827" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
 							<option id="com.qnx.qcc.option.compiler.optlevel.1143842353" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
 							<inputType id="com.qnx.qcc.inputType.compiler.351896626" superClass="com.qnx.qcc.inputType.compiler"/>
+						</tool>
+					</fileInfo>
+					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.1810277834" name="main.c" rcbsApplicability="disable" resourcePath="src/src/main.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.936074045">
+						<tool id="com.qnx.qcc.tool.compiler.2009519439.936074045" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.2009519439">
+							<option id="com.qnx.qcc.option.compiler.optlevel.1597185623" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
+							<inputType id="com.qnx.qcc.inputType.compiler.1121699605" superClass="com.qnx.qcc.inputType.compiler"/>
 						</tool>
 					</fileInfo>
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.689190260.699528627" name="picasso96.c" rcbsApplicability="disable" resourcePath="src/src/picasso96.c" toolsToInvoke="com.qnx.qcc.tool.compiler.2009519439.602051999">

@@ -996,11 +996,13 @@ static int load_kickstart (void)
     fprintf(stderr,"kick rom open '%s'\n", currprefs.romfile);
     f = zfile_open( currprefs.romfile, "rb");
     if(!f)
-    	fprintf(stderr,"zFile_open failed to load kickstart rom\n");
+    	fprintf(stderr,"zFile_open failed to load %s %s\n". currprefs.romfile, strerror(errno) );
 */
 
     if (f == NULL) {
-    	fprintf(stderr,"memory_init: kickstart failed to load %s\n", currprefs.romfile);
+    	fprintf(stderr,"\nmemory_init: kickstart failed to load %s\n", currprefs.romfile);
+
+
 #if defined (AMIGA)
 #define USE_UAE_ERSATZ "USE_UAE_ERSATZ"
 	if (!getenv (USE_UAE_ERSATZ)) {

@@ -111,7 +111,7 @@ static void sort_romlist (void)
 	}
     }
     romlist_cnt = j;
-    fprintf(stderr,"sorted rom count %d", romlist_cnt);
+    fprintf(stderr,"sorted rom count %d\n", romlist_cnt);
 }
 
 void romlist_clear (int mask)
@@ -633,17 +633,17 @@ void romwarning(int *ids)
 void scan_roms (char *rpath, int loc)
 {
     DIR *dir;
-    char *path ="/accounts/1000/shared/misc/uae/roms";
+    //char *path ="/accounts/1000/shared/misc/uae/roms";
 
-    fprintf(stderr,"scan_roms\n");
+    fprintf(stderr,"scan_roms: %s\n", rpath);
 
-    int pathlen = strlen (path);
+    int pathlen = strlen (rpath);
     int bufsz = pathlen + 256;
     char *buffer;
     uae_u8 *data;
     int keys_added = 0;
 
-    dir = opendir (path);
+    dir = opendir (rpath);
     if (!dir)
     {
        fprintf(stderr,"scan_roms: ERROR opendir failed %s\n", strerror(errno));
@@ -658,7 +658,7 @@ void scan_roms (char *rpath, int loc)
 	goto out1;
     romlist_clear (loc);
 
-    strcpy (buffer, path);
+    strcpy (buffer, rpath);
     buffer[pathlen++] = '/';
     buffer[pathlen] = '\0';
     for (;;) {
@@ -681,8 +681,10 @@ void scan_roms (char *rpath, int loc)
 	}
 	strcpy (buffer + pathlen, ent->d_name);
 	f = zfile_open (buffer, "rb");
-	if (!f)
-	    continue;
+	if (!f) {
+	    fprintf(stderr,"scan_roms: ERROR %s\n", buffer );
+		continue;
+	}
 
 	zfile_fseek (f, 0, SEEK_END);
 	size = zfile_ftell (f);

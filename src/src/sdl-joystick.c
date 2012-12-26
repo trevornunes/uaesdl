@@ -1,4 +1,4 @@
- /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             /*
   * UAE - The Un*x Amiga Emulator
   *
   * SDL Joystick code
@@ -40,41 +40,19 @@ static void read_joy (unsigned int nr)
 
     joy = joys[nr].joy;
 
-#ifdef __QNXNTO__
-   joy = joys[0].joy;
-    axes = SDL_JoystickNumAxes( joy );   // get joy0 axis map to port1
-    for(i = 0; i < axes;i++)
-    {
-    	axis= SDL_JoystickGetAxis(joy,i);
-        setjoystickstate(1,i, axis,32767);
-    }
-#else
-    joy = joys[nr].joy;
     axes = SDL_JoystickNumAxes (joy);
     for (i = 0; i < axes; i++)
     {
 	     axis = SDL_JoystickGetAxis (joy, i);
 	     setjoystickstate (nr, i, axis, 32767);
     }
-#endif
 
-
-#ifdef __QNXNTO__
-    joy = joys[0].joy;
-    int bs = SDL_JoystickGetButton(joy,0);
-
-    if(bs)
-    	fprintf(stderr,"button down\n");
-
-    setjoybuttonstate( 0,1,bs ); // port 1 is usually joystick for Amiga.
-                                 // so we map joypad 0 to port 1 mouse is in port 0.
-#else
     num = SDL_JoystickNumButtons (joy);
     for (i = 0; i < num; i++) {
 	   int bs = SDL_JoystickGetButton (joy, i) ? 1 : 0;
 	   setjoybuttonstate (nr, i, bs);
     }
-#endif
+
 }
 
 static unsigned int get_joystick_num (void)
@@ -145,7 +123,7 @@ static int init_joysticks (void)
 		joys[i].joy     = SDL_JoystickOpen (i);
 		joys[i].axles   = SDL_JoystickNumAxes (joys[i].joy);
 		joys[i].buttons = SDL_JoystickNumButtons (joys[i].joy);
-		fprintf(stderr,"buttons[%d] %d",i, joys[i].buttons);
+		fprintf(stderr,"joy %d has %d buttons\n",i, joys[i].buttons);
 	    }
 	    success = initialized = 1;
 	} else

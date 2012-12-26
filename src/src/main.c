@@ -223,7 +223,7 @@ void default_prefs (struct uae_prefs *p)
     p->jport1 = JSEM_JOYS;
 
     p->keyboard_lang = KBD_LANG_US;
-    p->emul_accuracy = 2;
+    p->emul_accuracy = 1;
     p->test_drawing_speed = 0;
 
     p->produce_sound = 3;
@@ -279,12 +279,13 @@ void default_prefs (struct uae_prefs *p)
     mkdir("/accounts/1000/shared/misc/uae/roms",0777);
 
   strcpy (p->df[0], "/accounts/1000/shared/misc/uae/roms/df0.adf");
- // strcpy (p->df[1], "/accounts/1000/shared/misc/uae/roms/Hardwir2.adf");
+  strcpy (p->df[1], "/accounts/1000/shared/misc/uae/roms/df1.adf");
   //  strcpy (p->df[2], "/accounts/1000/shared/misc/uae/roms/df0.adf");
   //  strcpy (p->df[3], "/accounts/1000/shared/misc/uae/roms/df1.adf");
 
- strcpy (p->romfile, "/accounts/1000/shared/misc/uae/roms/Kickstart v1.3 rev 34.5 (1987)(Commodore)(A3000).rom");
-    strcpy (p->keyfile, "");
+ strcpy (p->romfile, "/accounts/1000/shared/misc/uae/roms/kickstart.rom");
+
+ strcpy (p->keyfile, "");
     strcpy (p->prtname, DEFPRTNAME);
     p->rom_crc32 = 0;
 

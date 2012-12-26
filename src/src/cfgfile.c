@@ -855,6 +855,12 @@ static int cfgfile_parse_hardware (struct uae_prefs *p, char *option, char *valu
 	    p->cpu_model = 68060;
 	    p->fpu_model = 68060;
 	    break;
+	default:
+		fprintf(stderr,"unrecognised cpu model option, defaulting to 68020+68882 24bit addressing\n");
+	    p->cpu_model = 68020;
+	    p->address_space_24 = 1;
+	    p->fpu_model = 68882;
+	    break;
 	}
 	return 1;
     }

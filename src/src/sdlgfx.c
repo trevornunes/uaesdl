@@ -50,6 +50,9 @@
 static SDL_Surface *display;
 static SDL_Surface *screen;
 
+SDL_Surface *sdlGetScreen() { return screen; };
+SDL_Surface *sdlGetDisplay() { return display; };
+
 /* Standard P96 screen modes */
 #define MAX_SCREEN_MODES 12
 static int x_size_table[MAX_SCREEN_MODES] = { 320, 320, 320, 320, 640, 640, 640, 800,1024, 1152, 1280 };
@@ -118,6 +121,7 @@ void setup_brkhandler (void)
   signal (SIGINT, sigbrkhandler);
 #endif
 }
+
 
 /*
  * What graphics platform are we running on . . .?
@@ -1268,4 +1272,10 @@ void target_save_options (FILE *f, const struct uae_prefs *p)
 int target_parse_option (struct uae_prefs *p, const char *option, const char *value)
 {
     return 0;
+}
+
+
+void qnxErrNoKickstart()
+{
+
 }

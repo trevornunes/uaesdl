@@ -2228,7 +2228,11 @@ void inputdevice_unacquire (void)
 void setjoybuttonstate (int joy, int button, int state)
 {
     if (!joysticks[joy].enabled)
+    {
 	return;
+    }
+    if(state)
+       fprintf(stderr,"setjoybuttonstate joy=%d b=%d state=%d\n", joy,button,state);
     setbuttonstateall (&joysticks[joy], &joysticks2[joy], button, state ? 1 : 0);
 }
 
