@@ -417,6 +417,7 @@ void read_inputdevice_config (struct uae_prefs *pr, char *option, char *value)
     } else if (memcmp (option, "joystick.", 9) == 0) {
 	p = option + 9;
 	devnum = getnum (&p);
+	fprintf(stderr,"devnum %d\n", devnum);
 	if (devnum < 0 || devnum >= MAX_INPUT_DEVICES)
 	    return;
 	id = &pr->joystick_settings[idnum][devnum];
@@ -1247,6 +1248,8 @@ void handle_input_event (int nr, int state, int max, int autofire)
     if (nr <= 0)
 	return;
     ie = &events[nr];
+    fprintf(stderr,"handle_input_event\n");
+
     //write_log ("'%s' %d %d\n", ie->name, state, max);
     if (autofire) {
 	if (state)
@@ -1798,6 +1801,8 @@ int inputdevice_translatekeycode (int keyboard, int scancode, int state)
 
 void inputdevice_init (void)
 {
+	fprintf(stderr,"inputdevice_init\n");
+
     idev[IDTYPE_JOYSTICK] = inputdevicefunc_joystick;
     idev[IDTYPE_JOYSTICK].init ();
     idev[IDTYPE_MOUSE] = inputdevicefunc_mouse;
@@ -2229,10 +2234,10 @@ void setjoybuttonstate (int joy, int button, int state)
 {
     if (!joysticks[joy].enabled)
     {
-	return;
+	    fprintf(stderr,"setjoybuttonstate: joy %d disabled\n",joy);
+    	return;
     }
-    if(state)
-       fprintf(stderr,"setjoybuttonstate joy=%d b=%d state=%d\n", joy,button,state);
+
     setbuttonstateall (&joysticks[joy], &joysticks2[joy], button, state ? 1 : 0);
 }
 
@@ -2243,8 +2248,11 @@ void setjoybuttonstateall (int joy, uae_u32 buttonbits, uae_u32 buttonmask)
     int i;
 
     if (!joysticks[joy].enabled)
-	return;
-    for (i = 0; i < ID_BUTTON_TOTAL; i++) {
+    {
+	     fprintf(stderr,"joy %d disabled\n", joy);
+    	 return;
+    }
+	for (i = 0; i < ID_BUTTON_TOTAL; i++) {
 	if (buttonmask & (1 << i))
 	    setbuttonstateall (&joysticks[joy], &joysticks2[joy], i, (buttonbits & (1 << i)) ? 1 : 0);
 	else if (buttonbits & (1 << i))

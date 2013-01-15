@@ -35,9 +35,11 @@ static void read_joy (unsigned int nr)
     if (currprefs.input_selected_setting == 0)
     {
 	   if (jsem_isjoy (0, &currprefs) != (int)nr && jsem_isjoy (1, &currprefs) != (int)nr)
+	   {
+		   fprintf(stderr,"read_joy: no joystick configured\n");
 	       return;
+	   }
     }
-
     joy = joys[nr].joy;
 
     axes = SDL_JoystickNumAxes (joy);
@@ -97,11 +99,12 @@ static const char *get_joystick_name (unsigned int joy)
 
 static void read_joysticks (void)
 {
-    if (get_joystick_num ()) {
-	unsigned int i;
-	SDL_JoystickUpdate ();
-	for (i = 0; i < get_joystick_num (); i++)
-	    read_joy (i);
+    if (get_joystick_num ())
+    {
+	    unsigned int i;
+	    SDL_JoystickUpdate ();
+	   for (i = 0; i < get_joystick_num (); i++)
+	       read_joy (i);
     }
 }
 
@@ -120,11 +123,12 @@ static int init_joysticks (void)
 		nr_joysticks = MAX_INPUT_DEVICES;
 
 	    for (i = 0; i < get_joystick_num (); i++) {
-		joys[i].joy     = SDL_JoystickOpen (i);
-		joys[i].axles   = SDL_JoystickNumAxes (joys[i].joy);
-		joys[i].buttons = SDL_JoystickNumButtons (joys[i].joy);
-		fprintf(stderr,"joy %d has %d buttons\n",i, joys[i].buttons);
+	   	  joys[i].joy     = SDL_JoystickOpen (i);
+		  joys[i].axles   = SDL_JoystickNumAxes (joys[i].joy);
+		  joys[i].buttons = SDL_JoystickNumButtons (joys[i].joy);
+		  fprintf(stderr,"joy %p - %d initialized %d buttons\n",joys[i].joy, i, joys[i].buttons);
 	    }
+
 	    success = initialized = 1;
 	} else
 	    printf ("Failed to initialize joysticks\n");
