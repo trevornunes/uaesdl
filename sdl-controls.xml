@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
 
-<toucharea x="400" y="50" width="320" height="256" tapSensitive="1"/>
+<toucharea x="200" y="220" width="320" height="256" tapSensitive="1"/>
 
 <key x="0" y="0" width="80" height="100" sym="282" scancode="282"/>
 <key x="90" y="0" width="80" height="100" sym="283" scancode="283"/>
@@ -9,6 +9,8 @@
 <key x="0" y="130" width="80" height="100" sym="48" scancode="48"/>
 <key x="90" y="130" width="80" height="100" sym="49" scancode="49"/>
 
+<key x="860" y="240" width="80" height="100" sym="304" scancode="304"/>
+<key x="0" y="220" width="80" height="100" sym="303" scancode="303"/>
 
 <mousebutton x="860" y="50" width="80" height="100" mask="1" button="left"/>
 <mousebutton x="860" y="150" width="80" height="100" mask="1" button="right"/>

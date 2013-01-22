@@ -60,7 +60,6 @@ void finish_sound_buffer (void)
     dont_block = currprefs.m68k_speed == -1 && (!regs.stopped || active_fs_packets > 0);
     callback_sndbuf = sndbuf_base;
 
-
     if (dont_block)
       	delaying_for_sound = 1;
     uae_sem_post (&data_available_sem);

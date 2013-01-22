@@ -188,8 +188,6 @@ STATIC_INLINE unsigned long maskShift (unsigned long mask)
 
 static int get_color (int r, int g, int b, xcolnr *cnp)
 {
-    DEBUG_LOG ("Function: get_color\n");
-
     arSDLColors[ncolors].r = r << 4;
     arSDLColors[ncolors].g = g << 4;
     arSDLColors[ncolors].b = b << 4;
@@ -456,6 +454,7 @@ int graphics_setup (void)
 	   /* Find default display depth */
 	   bitdepth = info->vfmt->BitsPerPixel;
    	   bit_unit = info->vfmt->BytesPerPixel * 8;
+      // bitdepth = 8;
 
 	fprintf (stderr,"SDLGFX: Display %d bits per pixel\n", bitdepth);
 
@@ -484,19 +483,12 @@ int graphics_subinit (void)
 	curr_gfx = 0;
     } else {
 	// Set height, width for Amiga gfx
-
-#ifdef __QNXNTO__
-	fullscreen = currprefs.gfx_afullscreen = 1;
-	fprintf(stderr,"force fullscreen for QNX\n");
-	curr_gfx = &currprefs.gfx_f;
-    }
-#else
 	fullscreen = currprefs.gfx_afullscreen;
 	if (fullscreen)
 	    curr_gfx = &currprefs.gfx_f;
 	else
 	    curr_gfx = &currprefs.gfx_w;
-#endif
+    }
 #endif
 
 	current_width  = curr_gfx->width;
@@ -519,7 +511,7 @@ int graphics_subinit (void)
 	    SDL_SetVideoMode (biggest->w, biggest->h, bitdepth, SDL_FULLSCREEN);
     }
 
-    if (bitdepth == 8)
+     if (bitdepth == 8)
 	      uiSDLVidModFlags |= SDL_HWPALETTE;
 
 #ifdef __QNXNTO__

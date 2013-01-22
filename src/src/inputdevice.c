@@ -1248,7 +1248,6 @@ void handle_input_event (int nr, int state, int max, int autofire)
     if (nr <= 0)
 	return;
     ie = &events[nr];
-    fprintf(stderr,"handle_input_event\n");
 
     //write_log ("'%s' %d %d\n", ie->name, state, max);
     if (autofire) {

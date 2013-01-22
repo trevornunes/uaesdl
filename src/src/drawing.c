@@ -1114,9 +1114,7 @@ STATIC_INLINE void do_flush_screen (int start, int stop)
     if (gfxvidinfo.maxblocklines != 0 && first_block_line != NO_BLOCK) {
 	flush_block (first_block_line, last_block_line);
     }
-#ifndef __QNXNTO__
     unlockscr ();
-#endif
     if (start <= stop)
 	flush_screen (start, stop);
 }
@@ -1642,13 +1640,10 @@ void finish_drawing_frame (void)
 {
     int i;
 
-#ifndef __QNXNTO__
     if (! lockscr ()) {
 	notice_screen_contents_lost ();
 	return;
     }
-#endif
-
 
 #ifndef SMART_UPDATE
     /* @@@ This isn't exactly right yet. FIXME */

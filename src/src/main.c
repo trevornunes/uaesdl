@@ -39,6 +39,9 @@
 #include "scsidev.h"
 #include "romlist.h"
 
+#ifdef __QNXNTO__
+#include <sched.h>
+#endif
 
 #ifdef USE_SDL
 #include "SDL.h"
@@ -107,9 +110,9 @@ static void scan_configs ( void )
     memset(&apath[0],0,64);
 #ifdef __QNXNTO__
     sprintf(&apath[0],"/accounts/1000/shared/misc/uae");
+    fprintf(stderr,"scan_configs: '%s'", apath);
 #endif
 
-    fprintf(stderr,"scan_configs: '%s'", apath);
 
     int pathlen = strlen (apath);
     int bufsz = pathlen + 256;
@@ -669,12 +672,32 @@ void leave_program (void)
     do_leave_program ();
 }
 
+#ifdef __QNXNTO__
+
+
+void qnx_set_priority()
+{
+ struct sched_param par;
+
+  int max = sched_get_priority_max( SCHED_RR );
+  fprintf(stderr,"qnx max priority is %d\n", max);
+
+  sched_getparam( 0, &par);
+  par.sched_priority +=2;  /* try and bump it */
+  sched_setparam( 0, &par );
+  sched_getparam( 0, &par);
+  fprintf(stderr,"qnx new pri %d %d", par.sched_curpriority, par.sched_priority );
+ // sched_setscheduler(0, SCHED_FIFO, &par );
+}
+#endif
+
 void real_main (int argc, char **argv)
 {
     FILE *hf;
 
 #ifdef __QNXNTO__
     mkdir("/accounts/1000/shared/misc/uae",0777);
+    qnx_set_priority(); /* try and bump up the pid a few notches */
 #endif
 
    if(  SDL_Init(0) < 0)
@@ -684,6 +707,7 @@ void real_main (int argc, char **argv)
    }
 
     default_prefs (&currprefs);
+
 #ifndef __QNXNTO__
    scan_configs ();
 #endif
@@ -715,9 +739,10 @@ void real_main (int argc, char **argv)
     hardfile_install ();
     scsidev_install ();
 
-    //   parse_cmdline_and_init_file (argc, argv);
-
-   // machdep_init ();
+#ifndef __QNXNTO__
+    parse_cmdline_and_init_file (argc, argv);
+    machdep_init ();
+#endif
     init_gtod ();
 
     if (! setup_sound ()) {
