@@ -46,11 +46,7 @@ static void read_joy (unsigned int nr)
     for (i = 0; i < axes; i++)
     {
 	     axis = SDL_JoystickGetAxis (joy, i);
-#ifndef __QNXNTO__
 	     setjoystickstate (nr, i, axis, 32767);
-#else
-	     setjoystickstate (nr, i ,axis, 10);
-#endif
     }
 
     num = SDL_JoystickNumButtons (joy);

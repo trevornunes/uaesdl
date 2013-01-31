@@ -15,16 +15,17 @@
 <mousebutton x="860" y="50" width="80" height="100" mask="1" button="left"/>
 <mousebutton x="860" y="150" width="80" height="100" mask="1" button="right"/>
 
+<key x="760" y="420" width="80" height="100" sym="293" scancode="293"/>
 
 
 
 
-<dpad x="0" y="380" height="180" width="180">
-<label x="0" y="0"  height="180" width="180" image="dpad.png"/>
+<dpad x="0" y="360" height="200" width="200">
+<label x="0" y="0"  height="200" width="200" image="dpad.png"/>
 </dpad>
 
 <key x="860" y="420" width="80" height="80" sym="65" scancode="65">
-<label x="0" y="0" width="80" height="80" image="fire.png"/>
+<label x="0" y="0" width="80" height="80" image="A.png"/>
 </key>
 
 

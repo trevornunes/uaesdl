@@ -36,8 +36,6 @@ void romlist_add (char *path, struct romdata *rd, int loc)
     rl2->path = my_strdup (path);
     rl2->rd = rd;
     rl2->loc = loc;
-
-    fprintf(stderr,"romlist_add: %s\n",path);
 }
 
 char *romlist_get (struct romdata *rd)

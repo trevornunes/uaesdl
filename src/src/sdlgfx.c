@@ -44,7 +44,7 @@
 #ifdef DEBUG
 #define DEBUG_LOG printf
 #else
-#define DEBUG_LOG(...) printf
+#define DEBUG_LOG(...)
 #endif
 
 static SDL_Surface *display;

@@ -106,12 +106,14 @@ static void scan_configs ( void )
 {
     DIR *dir;
 
-    char apath[64];
+    char apath[65];
     memset(&apath[0],0,64);
+    /*
 #ifdef __QNXNTO__
     sprintf(&apath[0],"/accounts/1000/shared/misc/uae");
     fprintf(stderr,"scan_configs: '%s'", apath);
 #endif
+*/
 
 
     int pathlen = strlen (apath);
@@ -229,21 +231,21 @@ void default_prefs (struct uae_prefs *p)
     p->emul_accuracy = 1;
     p->test_drawing_speed = 0;
 
-    p->produce_sound = 3;
+    p->produce_sound = 2;
     p->sound_stereo = 1;
     p->sound_stereo_separation = 7;
     p->sound_mixed_stereo_delay = 0;
     p->sound_freq = DEFAULT_SOUND_FREQ;
     p->sound_maxbsiz = DEFAULT_SOUND_MAXB;
-    p->sound_interpol = 0;
+    p->sound_interpol = 1;
     p->sound_filter = FILTER_SOUND_OFF;
     p->sound_filter_type = FILTER_SOUND_TYPE_A500;
 
-    p->gfx_framerate = 0;
+    p->gfx_framerate = 2;
     p->gfx_w.width = 800;
     p->gfx_w.height = 576;
     p->gfx_w.lores = 1;
-    p->gfx_w.linedbl = 1;
+    p->gfx_w.linedbl = 0;
     p->gfx_w.correct_aspect = 0;
     p->gfx_w.xcenter = 0;
     p->gfx_w.ycenter = 0;
@@ -290,7 +292,7 @@ void default_prefs (struct uae_prefs *p)
 
  strcpy (p->keyfile, "");
     strcpy (p->prtname, DEFPRTNAME);
-    p->rom_crc32 = 0;
+    p->rom_crc32 =0;
 
     strcpy (p->path_rom, "/accounts/1000/shared/misc/uae/roms");
     strcpy (p->path_floppy, "/accounts/1000/shared/misc/uae/roms");
@@ -306,8 +308,8 @@ void default_prefs (struct uae_prefs *p)
     p->dfxtype[3] = DRV_NONE;
 
     p->m68k_speed = 0;
-    p->cpu_model = 68020;
-    p->fpu_model = 68882;
+    p->cpu_model = 68000;
+    p->fpu_model = 0;
     p->address_space_24 = 0;
 
          p->fastmem_size = 0x00000000;
@@ -708,8 +710,8 @@ void real_main (int argc, char **argv)
 
     default_prefs (&currprefs);
 
-#ifndef __QNXNTO__
-   scan_configs ();
+#ifndef __QNXNTO__  /* scan_configs crashes in memset ... remember! */
+  scan_configs ();
 #endif
 
    if(! fopen("/accounts/1000/shared/misc/uae/uaerc", "r") )
@@ -776,8 +778,9 @@ void real_main (int argc, char **argv)
 
 #ifdef SYSTEM_ROMDIR
     scan_roms (SYSTEM_ROMDIR, ROMLOC_SYSTEM);
+#else
+    scan_roms (currprefs.path_rom, ROMLOC_USER);
 #endif
-     scan_roms (currprefs.path_rom, ROMLOC_USER);
     /* Install resident module to get 8MB chipmem, if requested */
     rtarea_setup ();
 

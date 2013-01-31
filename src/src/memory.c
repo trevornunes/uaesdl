@@ -981,17 +981,54 @@ static int load_kickstart (void)
 	        struct romlist *rl = romlist_from_idx (i, ROMTYPE_KICK, 1);
 	        if (!rl)
 		         break;
+	        fprintf(stderr,"rom_crc32 trying idx %d\n",i);
 	        if (rl->rd->crc32 == currprefs.rom_crc32)
 	        {
 	 	               f = zfile_open (rl->path, "rb");
 	 	               break;
+	        } else {
+	        	fprintf(stderr,"rom_crc32 %x != %x\n", rl->rd->crc32, currprefs.rom_crc32);
 	        }
 
 	    }
     }
      else
+     {
 	     f = zfile_open (currprefs.romfile, "rb");
+#ifdef __QNXNTO__
+	     if(f)
+	     {
+	       fprintf(stderr,"romfile = %s\n", currprefs.romfile);
+	     }
+	       else
+	     {    /* nothing to lose hunt for 1.2 or 1.3 A500 kickstart ... */
+	    	fprintf(stderr,"hunting for a kickstart ...\n");
+	    	  for (i = 0;; i++) {
+	    		        struct romlist *rl = romlist_from_idx (i, ROMTYPE_KICK, 1);
+	    		        if (!rl)
+	    			         break;
+	    		        /* Since no crc32 was initally set and the romfile is null
+	    		         * but we possibly have a match from pre-cached roms lets try
+	    		         * kickstart 1.2 or 1.3 i.e A500 as last ditch attempt
+	    		         */
+	    		        fprintf(stderr,"kickstart rev %d\n", rl->rd->rev);
 
+	    		        if( (rl->rd->rev == 3) || (rl->rd->rev == 4) )
+	    		            currprefs.rom_crc32 = rl->rd->crc32;
+
+	    		        if (rl->rd->crc32 == currprefs.rom_crc32)
+	    		        {
+	    		 	        f = zfile_open (rl->path, "rb");
+	    		 	        if(!f)
+	    		 	          fprintf(stderr,"open failed for '%s'\n", rl->path);
+	    		 	        else
+	    		 	        	goto readDaKick;
+	    		 	        break;
+	    		        }
+	          }
+	     }
+#endif
+	     }
 /*
     fprintf(stderr,"kick rom open '%s'\n", currprefs.romfile);
     f = zfile_open( currprefs.romfile, "rb");
@@ -1000,8 +1037,9 @@ static int load_kickstart (void)
 */
 
     if (f == NULL) {
-    	fprintf(stderr,"\nmemory_init: kickstart failed to load %s\n", currprefs.romfile);
+    	fprintf(stderr,"\nmemory_init: kickstart failed to open %s\n", currprefs.romfile);
 
+readDaKick:
 
 #if defined (AMIGA)
 #define USE_UAE_ERSATZ "USE_UAE_ERSATZ"

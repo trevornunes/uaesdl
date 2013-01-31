@@ -798,6 +798,7 @@ static int cfgfile_parse_hardware (struct uae_prefs *p, char *option, char *valu
 	    struct romlist *rl = romlist_from_idx (i, ROMTYPE_KICK, 1);
 	    if (!rl)
 		break;
+	    fprintf(stderr,"comparing CRC32[%d] with kickstart_rom_crc_attempt 0x%x\n", i, rl->rd->crc32,crc32);
 	    if (rl->rd->crc32 == crc32) {
 		p->rom_crc32 = crc32;
 		break;
